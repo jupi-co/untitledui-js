@@ -1,5 +1,6 @@
 import { Suspense, lazy, FC } from "react";
 import { SVGComponentProps, DefaultLazyImportFallback } from "./template";
+import {dynamicImportWithRetry} from '@fatso83/retry-dynamic-import';
 
 export type IconNames =
   | "Activity"
@@ -1138,7 +1139,7 @@ interface LazyIconProps extends SVGComponentProps {
 }
 
 const LazyIcon: FC<LazyIconProps> = ({ name, fallback, ...props }) => {
-  const Icon = lazy(() => import(/* @vite-ignore */ `./icons/${name}`));
+  const Icon = lazy(() => dynamicImportWithRetry(() =>import(/* @vite-ignore */ `./icons/${name}`)));
 
   return (
     <Suspense fallback={fallback ? fallback : <DefaultLazyImportFallback />}>

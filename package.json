@@ -61,5 +61,8 @@
     "animation",
     "javascript",
     "icons library"
-  ]
+  ],
+  "dependencies": {
+    "@fatso83/retry-dynamic-import": "^2.1.1"
+  }
 }
